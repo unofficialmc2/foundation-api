@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<ruleset name="CityZen coding standard">
+    <description>CityZen coding standard</description>
+
+    <!-- display progress -->
+    <arg value="p"/>
+    <!-- use colors in output -->
+    <arg name="colors"/>
+    <arg name="parallel" value="75"/>
+    <arg value="np"/>
+    <config name="ignore_warnings_on_exit" value="1"/>
+
+
+    <!-- Paths to check -->
+    <file>src</file>
+    <file>test</file>
+
+    <!-- inherit rules from -->
+    <rule ref="PSR2"/>
+
+    <!-- Don't hide tokenizer exceptions -->
+    <rule ref="Internal.Tokenizer.Exception">
+        <type>error</type>
+    </rule>
+
+    <!-- Obligation de commenter -->
+    <rule ref="Generic.Files.LineEndings.InvalidEOLChar">
+        <type>warning</type>
+    </rule>
+    <rule ref="PEAR.Commenting.ClassComment.Missing"/>
+    <rule ref="PEAR.Commenting.FunctionComment.Missing">
+        <exclude-pattern>test/*</exclude-pattern>
+        <exclude-pattern>test/**/*</exclude-pattern>
+    </rule>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.PHP.RequireStrictTypes"/>
+
+
+    <!-- Autorisation spécific pour les fichier de test -->
+    <rule ref="PSR1.Methods.CamelCapsMethodName">
+        <exclude-pattern>test/*</exclude-pattern>
+        <exclude-pattern>test/**/*</exclude-pattern>
+    </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
+        <exclude-pattern>test/*</exclude-pattern>
+        <exclude-pattern>test/**/*</exclude-pattern>
+    </rule>
+
+</ruleset>
