@@ -1,6 +1,6 @@
 {
   "name": "unofficialmc2/foundation-api",
-  "description": "Package contenant un ensemble de class permettant de construire un API",
+  "description": "Package contenant un ensemble de class permettant de construire un API avec Slim v4",
   "type": "library",
   "authors": [
     {
@@ -24,6 +24,7 @@
     "slim/slim": "^4.10"
   },
   "require-dev": {
+    "fakerphp/faker": "^1.20",
     "fzed51/version": "^2.0",
     "ocramius/package-versions": "^2.6",
     "phpstan/phpstan": "^1.8",
@@ -52,7 +53,7 @@
     }
   },
   "scripts": {
-    "check": [
+    "lint": [
       "phpcs",
       "phpstan"
     ],
