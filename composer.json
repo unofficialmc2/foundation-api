@@ -68,5 +68,14 @@
     "_version:maj": "version-manager -u major",
     "_version:min": "version-manager -u minor",
     "_version:pat": "version-manager -u patch"
+  },
+  "scripts-descriptions": {
+    "lint": "Verify code quality.",
+    "fix": "Fix code quality.",
+    "test": "Run unit test.",
+    "version": "Show the current version.",
+    "_version:maj": "update to next major version.",
+    "_version:min": "update to next minor version.",
+    "_version:pat": "update to next patch version."
   }
 }
