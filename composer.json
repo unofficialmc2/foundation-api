@@ -1,6 +1,6 @@
 {
   "name": "unofficialmc2/foundation-api",
-  "description": "Package contenant un ensemble de class permettant de construire un API",
+  "description": "Package contenant un ensemble de class permettant de construire un API avec Slim v4",
   "type": "library",
   "authors": [
     {
@@ -10,26 +10,26 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "php": ">=7.4",
+    "php": "^8.1",
     "ext-curl": "*",
     "ext-json": "*",
     "ext-openssl": "*",
     "ext-pdo": "*",
-    "fzed51/http-exception": "^2.0",
-    "fzed51/instance-resolver": "^1.4",
-    "fzed51/migration": "^1.4",
-    "fzed51/pdo-helper": "^1.5",
-    "fzed51/respect-validation-wrapper": "^3.3",
-    "monolog/monolog": "^2.2",
-    "slim/slim": "3.*"
+    "fzed51/http-exception": "^3.0",
+    "fzed51/instance-resolver": "^2.0",
+    "fzed51/migration": "^2.0",
+    "fzed51/pdo-helper": "^2.0",
+    "fzed51/respect-validation-wrapper": "^4.0",
+    "monolog/monolog": "^3.2",
+    "slim/slim": "^4.10"
   },
   "require-dev": {
-    "fzaninotto/faker": "^1.9",
-    "fzed51/version": "^1.1",
-    "ocramius/package-versions": "^2.1",
-    "phpstan/phpstan": "^0.12.88",
+    "fakerphp/faker": "^1.20",
+    "fzed51/version": "^2.0",
+    "ocramius/package-versions": "^2.6",
+    "phpstan/phpstan": "^1.8",
     "phpunit/phpunit": "^9.5",
-    "squizlabs/php_codesniffer": "^3.6"
+    "squizlabs/php_codesniffer": "^3.7"
   },
   "suggest": {
     "firebase/php-jwt": "pour la gestion des JWT",
@@ -53,7 +53,7 @@
     }
   },
   "scripts": {
-    "check": [
+    "lint": [
       "phpcs",
       "phpstan"
     ],
@@ -68,5 +68,14 @@
     "_version:maj": "version-manager -u major",
     "_version:min": "version-manager -u minor",
     "_version:pat": "version-manager -u patch"
+  },
+  "scripts-descriptions": {
+    "lint": "Verify code quality.",
+    "fix": "Fix code quality.",
+    "test": "Run unit test.",
+    "version": "Show the current version.",
+    "_version:maj": "update to next major version.",
+    "_version:min": "update to next minor version.",
+    "_version:pat": "update to next patch version."
   }
 }

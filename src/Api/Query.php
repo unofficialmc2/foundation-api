@@ -13,7 +13,7 @@ use Psr\Log\LoggerInterface;
 abstract class Query
 {
     use Valuable;
-    use useALogger;
+    use UseALogger;
 
     /**
      * Query constructor.

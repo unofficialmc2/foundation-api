@@ -7,5 +7,5 @@ parameters:
         - test
     # bootstrapFiles:
     #    - bootstrap/define.php
-    ignoreErrors:
-        - '#Strict comparison using === between PDOStatement and false will always evaluate to false.#'
+    # ignoreErrors:
+    #    - '#Strict comparison using === between PDOStatement and false will always evaluate to false.#'

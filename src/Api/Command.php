@@ -12,7 +12,7 @@ use Psr\Log\LoggerInterface;
 abstract class Command
 {
     use Valuable;
-    use useALogger;
+    use UseALogger;
 
     /**
      * Command constructor.

@@ -10,7 +10,7 @@ trait UseExceptionFormatter
 {
     /**
      * Mise en forme d'une exception
-     * @param \Exception $err
+     * @param \Throwable $err
      * @return string
      */
     protected static function exceptionToString(\Throwable $err): string
