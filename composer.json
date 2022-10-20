@@ -21,6 +21,9 @@
     "fzed51/pdo-helper": "^2.0",
     "fzed51/respect-validation-wrapper": "^4.0",
     "monolog/monolog": "^3.2",
+    "pimple/pimple": "^3.5",
+    "slim/http": "^1.2",
+    "slim/psr7": "^1.5",
     "slim/slim": "^4.10"
   },
   "require-dev": {
