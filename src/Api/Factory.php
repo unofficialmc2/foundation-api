@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Api;
 
@@ -17,9 +18,11 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Slim\App;
-use Slim\Http\Factory\DecoratedResponseFactory;
 use Slim\Psr7\Factory\ResponseFactory;
 
+/**
+ * Class permettant de créer une app Slim v4
+ */
 class Factory
 {
     /**
