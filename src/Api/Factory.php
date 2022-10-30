@@ -31,9 +31,10 @@ class Factory
      */
     public static function create(array $config): App
     {
+        /** @var \Api\Container $container */
         $container = self::getContainer($config);
-        $instanceResolver = self::getInstanceResolver($container);
-        $logger = self::getLogger($config);
+        $container->set('resolve', self::getInstanceResolver($container));
+        $container->set(LoggerInterface::class, self::getLogger($config));
         $responseFactory = self::getResponseFactory();
 
         $app = new \Slim\App(
@@ -53,10 +54,8 @@ class Factory
      */
     protected static function getContainer(array $config): ContainerInterface
     {
-        return new \Pimple\Psr11\Container(
-            new \Pimple\Container(
-                $config
-            )
+        return new Container(
+            new \Pimple\Container(["settings"=>$config])
         );
     }
 
@@ -66,7 +65,6 @@ class Factory
      */
     protected static function getLogger(array $config): LoggerInterface
     {
-        $settings = $config['settings'];
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ipClient = $_SERVER['HTTP_CLIENT_IP'];
         } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -74,8 +72,8 @@ class Factory
         } else {
             $ipClient = $_SERVER['REMOTE_ADDR']??'unknown';
         }
-        $logger = new Logger($settings['logger']['name']);
-        $logPath = $settings['logger']['path'];
+        $logger = new Logger($config['logger']['name']);
+        $logPath = $config['logger']['path'];
         $logError = rtrim($logPath, '/') . '/events-' . (new DateTime())->format('Y-m-d') . '.log';
         $logDebug = rtrim($logPath, '/') . '/events_json.log';
         $logger->pushProcessor(new UidProcessor());

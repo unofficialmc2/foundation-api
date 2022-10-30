@@ -15,12 +15,10 @@ class FactoryTest extends TestCase
     public function testCreate(): void
     {
         $app = Factory::create([
-            "settings"=>[
                 "logger" => [
                     "name" => "test",
                     "path" => __DIR__ . "/../..",
                 ]
-            ]
         ]);
         self::assertInstanceOf(App::class, $app);
     }
