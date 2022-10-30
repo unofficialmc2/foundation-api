@@ -17,15 +17,12 @@ abstract class Middleware
     use UseALogger;
     use UseExceptionFormatter;
 
-    protected ContainerInterface $container;
-
     /**
      * Middleware constructor.
      * @param ContainerInterface $container
      */
-    final public function __construct(ContainerInterface $container)
+    final public function __construct(protected ContainerInterface $container)
     {
-        $this->container = $container;
     }
 
     /**
