@@ -28,10 +28,32 @@ return [
 
 L'exemple ci-dessus est le strict minimum pour les settings de l'app
 
-### create
+#### create
 
 ```php
 <?php
 $settings = [...];
 $app = \Api\Factory::create($settings);
+```
+
+### Les Middleware
+
+Pour créer un middleware utiliser la class `\Api\MiddleWare` et implémenter la methode `__invoke`.
+
+> ⚠️Ne pas modifier la signature du contructeur
+
+exemple :
+```php
+class SampleMiddleware extends \Api\Middleware
+{
+    /**
+     * @inheritDoc
+     */
+    public function __invoke(Request $request, RequestHandler $handler): Response
+    {
+        // Faire qqchose avant le process
+        $response $handler->handle($request);
+        // Faire qqchose après le process
+        return $response;
+    }
 ```

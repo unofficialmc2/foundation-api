@@ -6,6 +6,7 @@ namespace Api;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
 /**
  * Class Middleware
@@ -26,11 +27,10 @@ abstract class Middleware
     }
 
     /**
-     * @param Request $request
-     * @param Response $response
-     * @param callable $next
-     * @phpstan-param callable(Request $request, Response $response): Response $next
-     * @return Response
+     * Fonction du middleware
+     * @param  Request        $request PSR-7 request
+     * @param  RequestHandler $handler PSR-15 request handler
+     * @return Response                PSR-7 response
      */
-    abstract public function __invoke(Request $request, Response $response, callable $next): Response;
+    abstract public function __invoke(Request $request, RequestHandler $handler): Response;
 }
