@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace Api;
 
+use Psr\Container\ContainerInterface;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Log\LoggerInterface;
-use Slim\Exception\ContainerException;
 use UnderflowException;
 
 /**
@@ -13,6 +14,7 @@ use UnderflowException;
 trait UseALogger
 {
 
+    protected ContainerInterface $container;
     private ?LoggerInterface $logger = null;
 
     /**
@@ -35,7 +37,7 @@ trait UseALogger
                 $this->logger = $logger;
             }
             return $this->logger;
-        } catch (ContainerException $e) {
+        } catch (ContainerExceptionInterface $e) {
             throw new \RuntimeException("Impossible de trouver le logger", $e->getCode(), $e);
         }
     }
