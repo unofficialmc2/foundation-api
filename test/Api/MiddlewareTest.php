@@ -1,12 +1,16 @@
 <?php
+declare(strict_types=1);
 
 namespace Api;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Psr7\Factory\RequestFactory;
+use Slim\Psr7\Factory\ServerRequestFactory;
 use Test\Fake\Middleware as MiddlewareAlias;
 
+/**
+ * Test de la class Middleware
+ */
 class MiddlewareTest extends TestCase
 {
     public static function testAddMiddleware(): void
@@ -21,8 +25,8 @@ class MiddlewareTest extends TestCase
             return $response;
         })->setName("root");
         $app->addRoutingMiddleware();
-        $factory = new RequestFactory();
-        $request = $factory->createRequest('GET', '/');
+        $factory = new ServerRequestFactory();
+        $request = $factory->createServerRequest('GET', '/');
         $response = $app->handle($request);
     }
 }
