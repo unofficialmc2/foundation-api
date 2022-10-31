@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace Api;
 
-use Psr\Log\LoggerInterface;
-use RuntimeException;
-use Slim\Container;
-use Slim\Exception\ContainerException;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
 /**
  * Class Middleware
@@ -20,23 +18,19 @@ abstract class Middleware
     use UseALogger;
     use UseExceptionFormatter;
 
-    protected Container $container;
-
     /**
      * Middleware constructor.
-     * @param Container $container
+     * @param ContainerInterface $container
      */
-    final public function __construct(Container $container)
+    final public function __construct(protected ContainerInterface $container)
     {
-        $this->container = $container;
     }
 
     /**
-     * @param Request $request
-     * @param Response $response
-     * @param callable $next
-     * @phpstan-param callable(Request $request, Response $response): Response $next
-     * @return Response
+     * Fonction du middleware
+     * @param  Request        $request PSR-7 request
+     * @param  RequestHandler $handler PSR-15 request handler
+     * @return Response                PSR-7 response
      */
-    abstract public function __invoke(Request $request, Response $response, callable $next): Response;
+    abstract public function __invoke(Request $request, RequestHandler $handler): Response;
 }

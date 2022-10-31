@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api;
 
 use InstanceResolver\ResolverClass;
+use Psr\Container\ContainerInterface;
 use RuntimeException;
 use Throwable;
 use UnderflowException;
@@ -14,6 +15,7 @@ use UnderflowException;
 trait UseAnInstanceResolver
 {
 
+    protected ContainerInterface $container;
     private ?ResolverClass $autowiring = null;
 
 

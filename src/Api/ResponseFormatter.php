@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Api;
 
-use Slim\Http\Response;
+use Psr\Http\Message\ResponseInterface as Response;
 
 /**
  * Interface pour les class de mise en forme de réponse
@@ -13,15 +13,15 @@ interface ResponseFormatter
 
     /**
      * Formate une réponse avec succes avec un objet $data
-     * @param \Slim\Http\Response $response
+     * @param \Psr\Http\Message\ResponseInterface $response
      * @param object|array<mixed>|null $data (null par defaut)
-     * @return \Slim\Http\Response
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function formatSuccess(Response $response, $data = null): Response;
 
     /**
      * Formate une réponse redirect avec un objet $data
-     * @param \Slim\Http\Response $response
+     * @param \Psr\Http\Message\ResponseInterface $response
      * @param string $url
      * @param object|array<mixed>|null $data (null par defaut)
      * @return Response
@@ -30,7 +30,7 @@ interface ResponseFormatter
 
     /**
      * Formate une réponse avec erreur en spécifiant tout les elements
-     * @param \Slim\Http\Response $response
+     * @param \Psr\Http\Message\ResponseInterface $response
      * @param integer $code
      * @param string $message
      * @param object|array<mixed>|null $detail
