@@ -33,7 +33,7 @@ abstract class Controller
     {
         $this->container = $container;
 
-        if ($this->responseFormatter === null && !$this->container->has(ResponseFormatter::class)) {
+        if (!$this->container->has(ResponseFormatter::class)) {
             throw new RuntimeException("ResponseFormatter n'est pas initialisé");
         }
 

@@ -53,7 +53,10 @@
   "autoload": {
     "psr-4": {
       "Api\\": "./src/Api"
-    }
+    },
+    "files": [
+      "./src/Api/Helper/function.php"
+    ]
   },
   "scripts": {
     "lint": [
