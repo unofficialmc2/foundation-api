@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Api;
 
@@ -8,15 +9,8 @@ use Psr\Container\ContainerInterface;
 /**
  * Surcharge un container Pimple pour le rendre compatible avec ContainerInterface
  */
-class Container implements ContainerInterface
+class Container extends PimpleContainer implements ContainerInterface
 {
-    /**
-     * Constructeur
-     * @param PimpleContainer $container
-     */
-    public function __construct(private PimpleContainer $container)
-    {
-    }
 
     /**
      * initialise une valeur du container
@@ -24,9 +18,9 @@ class Container implements ContainerInterface
      * @param mixed $value
      * @return void
      */
-    public function set(string $id, mixed $value)
+    public function set(string $id, mixed $value): void
     {
-        $this->container[$id] = $value;
+        $this->offsetSet($id, $value);
     }
 
     /**
@@ -36,7 +30,7 @@ class Container implements ContainerInterface
      */
     public function get(string $id)
     {
-        return $this->container[$id];
+        return $this->offsetGet($id);
     }
 
     /**
@@ -46,6 +40,6 @@ class Container implements ContainerInterface
      */
     public function has(string $id): bool
     {
-        return isset($this->container[$id]);
+        return $this->offsetExists($id);
     }
 }

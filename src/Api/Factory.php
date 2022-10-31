@@ -54,9 +54,7 @@ class Factory
      */
     protected static function getContainer(array $config): ContainerInterface
     {
-        return new Container(
-            new \Pimple\Container(["settings"=>$config])
-        );
+        return new Container(["settings"=>$config]);
     }
 
     /**
