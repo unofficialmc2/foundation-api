@@ -63,7 +63,7 @@ abstract class Controller
      * @param mixed $data
      * @return Response
      */
-    protected function returnSuccess(Response $response, $data = null): Response
+    protected function returnSuccess(Response $response, mixed $data = null): Response
     {
         return $this->responseFormatter->formatSuccess($response, $data);
     }
@@ -74,7 +74,7 @@ abstract class Controller
      * @param mixed $data
      * @return Response
      */
-    protected function returnRedirect(Response $response, string $newUrl = "urlPortail", $data = null): Response
+    protected function returnRedirect(Response $response, string $newUrl = "urlPortail", mixed $data = null): Response
     {
         return $this->responseFormatter->formatRedirect($response, $newUrl, $data);
     }
@@ -83,14 +83,15 @@ abstract class Controller
      * @param Request $request
      * @param null|callable $validator
      * @phpstan-param  (null|callable(mixed $data): void) $validator
+     * @param bool $returnAssoc
      * @return mixed
      * @throws BadRequestException
      */
-    protected function readBodyJson(Request $request, ?callable $validator = null)
+    protected function readBodyJson(Request $request, ?callable $validator = null, bool $returnAssoc = false): mixed
     {
         $rawBody = (string)$request->getBody();
         try {
-            $data = json_decode($rawBody, false, 512, JSON_THROW_ON_ERROR);
+            $data = json_decode($rawBody, $returnAssoc, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException $e) {
             $this->log()->debug(self::exceptionToString($e), ["body" => $rawBody ]);
             throw new BadRequestException("Le format du cops de la requète n'est pas valide.");
