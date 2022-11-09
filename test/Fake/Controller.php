@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Test\Fake;
 
 use Api\Controller as ApiController;
-use Api\ResponseFormatter;
+use Api\ResponseFormatterInterface;
 use Closure;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
