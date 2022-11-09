@@ -23,7 +23,7 @@ class ControllerTest extends TestCase
     {
         $assert = self::assertTrue(...);
         $container = new Container();
-        $container->set(ResponseFormatter::class, function (ContainerInterface $c) {
+        $container->set(ResponseFormatterInterface::class, function (ContainerInterface $c) {
             return new Formatter();
         });
         $ctrl = new FakeController($container);
@@ -44,7 +44,7 @@ class ControllerTest extends TestCase
         ]);
         /** @var \Api\Container $container */
         $container = $app->getContainer();
-        $container->set(ResponseFormatter::class, function (ContainerInterface $c) {
+        $container->set(ResponseFormatterInterface::class, function (ContainerInterface $c) {
             return new Formatter();
         });
         $app->get('/', cm(FakeController::class, 'index'));
