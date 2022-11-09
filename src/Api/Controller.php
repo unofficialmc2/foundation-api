@@ -22,7 +22,7 @@ abstract class Controller
     use UseALogger;
     use UseExceptionFormatter;
 
-    protected ?ResponseFormatter $responseFormatter = null;
+    protected ?ResponseFormatterInterface $responseFormatter = null;
     protected ContainerInterface $container;
 
     /**
@@ -33,13 +33,13 @@ abstract class Controller
     {
         $this->container = $container;
 
-        if (!$this->container->has(ResponseFormatter::class)) {
+        if (!$this->container->has(ResponseFormatterInterface::class)) {
             throw new RuntimeException("ResponseFormatter n'est pas initialisé");
         }
 
         if ($this->responseFormatter === null) {
             try {
-                $this->responseFormatter = $this->container->get(ResponseFormatter::class);
+                $this->responseFormatter = $this->container->get(ResponseFormatterInterface::class);
             } catch (ContainerExceptionInterface $e) {
                 $this->log()->debug(self::exceptionToString($e));
                 throw new RuntimeException("Impossible d'initialiser le ResponseFormatter");

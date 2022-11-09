@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Test\Fake;
 
-use Api\ResponseFormatter;
+use Api\ResponseFormatterInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 
 /**
  * Fake ResponseFormatter
  */
-class Formatter implements ResponseFormatter
+class Formatter implements ResponseFormatterInterface
 {
 
     /**
      * @inheritDoc
      */
-    public function formatSuccess(Response $response, $data = null): Response
+    public function formatSuccess(Response $response, array|object $data = null): Response
     {
         return $response;
     }
