@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Api;
+namespace FoundationApi;
 
 use Pimple\Container as PimpleContainer;
 use Psr\Container\ContainerInterface;

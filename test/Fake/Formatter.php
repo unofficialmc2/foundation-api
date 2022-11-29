@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Fake;
 
-use Api\ResponseFormatterInterface;
+use FoundationApi\ResponseFormatterInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 
 /**

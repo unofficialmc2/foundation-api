@@ -10,7 +10,7 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 /**
  * Middleware de Test
  */
-class Middleware extends \Api\Middleware
+class Middleware extends \FoundationApi\Middleware
 {
 
     const MIDDLEWARE = "middleware";

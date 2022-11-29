@@ -47,12 +47,12 @@
   "autoload-dev": {
     "psr-4": {
       "Test\\": "./test",
-      "Api\\": "./test/Api"
+      "FoundationApi\\": "./test/Api"
     }
   },
   "autoload": {
     "psr-4": {
-      "Api\\": "./src/Api"
+      "FoundationApi\\": "./src/Api"
     },
     "files": [
       "./src/Api/Helper/function.php"
