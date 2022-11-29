@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Api;
+namespace FoundationApi;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;

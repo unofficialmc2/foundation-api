@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Api;
+namespace FoundationApi;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -42,7 +42,7 @@ class ControllerTest extends TestCase
         $app = Factory::create([
             "logger"=>["name"=>"test","path" => __DIR__ . "/../log"]
         ]);
-        /** @var \Api\Container $container */
+        /** @var \FoundationApi\Container $container */
         $container = $app->getContainer();
         $container->set(ResponseFormatterInterface::class, function (ContainerInterface $c) {
             return new Formatter();

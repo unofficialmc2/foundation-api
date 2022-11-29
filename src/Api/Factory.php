@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Api;
+namespace FoundationApi;
 
 use DateTime;
 use HttpException\HttpException;
@@ -31,7 +31,7 @@ class Factory
      */
     public static function create(array $config): App
     {
-        /** @var \Api\Container $container */
+        /** @var \FoundationApi\Container $container */
         $container = self::getContainer($config);
         $container->set('resolve', self::getInstanceResolver($container));
         $container->set(LoggerInterface::class, self::getLogger($config));
@@ -54,7 +54,17 @@ class Factory
      */
     protected static function getContainer(array $config): ContainerInterface
     {
-        return new Container(["settings"=>$config]);
+        return new Container(["settings" => $config]);
+    }
+
+    /**
+     * Récupération d'un resolver d'instance
+     * @param \Psr\Container\ContainerInterface $container
+     * @return \InstanceResolver\ResolverClass
+     */
+    protected static function getInstanceResolver(ContainerInterface $container): ResolverClass
+    {
+        return new ResolverClass($container);
     }
 
     /**
@@ -68,7 +78,7 @@ class Factory
         } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ipClient = $_SERVER['HTTP_X_FORWARDED_FOR'];
         } else {
-            $ipClient = $_SERVER['REMOTE_ADDR']??'unknown';
+            $ipClient = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
         }
         $logger = new Logger($config['logger']['name']);
         $logPath = $config['logger']['path'];
@@ -100,15 +110,5 @@ class Factory
     protected static function getResponseFactory(): ResponseFactoryInterface
     {
         return new ResponseFactory();
-    }
-
-    /**
-     * Récupération d'un resolver d'instance
-     * @param \Psr\Container\ContainerInterface $container
-     * @return \InstanceResolver\ResolverClass
-     */
-    protected static function getInstanceResolver(ContainerInterface $container): ResolverClass
-    {
-        return new ResolverClass($container);
     }
 }

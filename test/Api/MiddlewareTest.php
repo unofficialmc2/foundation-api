@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Api;
+namespace FoundationApi;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;

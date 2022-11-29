@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Test\Fake;
 
-use Api\Controller as ApiController;
-use Api\ResponseFormatterInterface;
+use FoundationApi\Controller as ApiController;
+use FoundationApi\ResponseFormatterInterface;
 use Closure;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;

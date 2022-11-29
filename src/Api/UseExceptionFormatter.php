@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Api;
+namespace FoundationApi;
 
 /**
  * Trait pour fournir une méthode de mise en forme des exceptions
