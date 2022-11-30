@@ -68,13 +68,12 @@ abstract class Validator
      * @param mixed $data
      * @return boolean
      * @throws \HttpException\BadRequestException
-     * @throws \HttpException\InternalServerException
      * @noinspection JsonEncodingApiUsageInspection
      */
-    public function __invoke($data): bool
+    public function __invoke(mixed $data): bool
     {
         if ($this->validator === null) {
-            throw new InternalServerException("Le validateur " . static::class . " n'est pas initialisé");
+            throw new RuntimeException("Le validateur " . static::class . " n'est pas initialisé");
         }
         try {
             $this->validator->assert($data);
@@ -92,7 +91,7 @@ abstract class Validator
      * @param mixed $data
      * @return string[]
      */
-    public function getErrors($data): array
+    public function getErrors(mixed $data): array
     {
         if ($this->validator === null) {
             throw new RuntimeException("Le validateur " . static::class . " n'est pas initialisé");
