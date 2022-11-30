@@ -81,13 +81,14 @@ abstract class Controller
 
     /**
      * @param Request $request
-     * @param null|callable $validator
-     * @phpstan-param  (null|callable(mixed $data): void) $validator
+     * @param null|callable|\FoundationApi\Validator $validator
+     * @phpstan-param  null|(callable(mixed $data): void)|\FoundationApi\Validator $validator
      * @param bool $returnAssoc
      * @return mixed
      * @throws BadRequestException
+     * @throws \HttpException\InternalServerException
      */
-    protected function readBodyJson(Request $request, ?callable $validator = null, bool $returnAssoc = false): mixed
+    protected function readBodyJson(Request $request, ?callable|Validator $validator = null, bool $returnAssoc = false): mixed
     {
         $rawBody = (string)$request->getBody();
         try {
