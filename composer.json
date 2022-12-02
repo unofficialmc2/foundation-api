@@ -8,6 +8,7 @@
       "email": "fabien.sanchez@arche-mc2.fr"
     }
   ],
+  "license": "MIT",
   "minimum-stability": "stable",
   "require": {
     "php": "^8.1",
@@ -44,12 +45,6 @@
   "config": {
     "sort-packages": true
   },
-  "autoload-dev": {
-    "psr-4": {
-      "Test\\": "./test",
-      "FoundationApi\\": "./test/Api"
-    }
-  },
   "autoload": {
     "psr-4": {
       "FoundationApi\\": "./src/Api"
@@ -57,6 +52,12 @@
     "files": [
       "./src/Api/Helper/function.php"
     ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\": "./test",
+      "FoundationApi\\": "./test/Api"
+    }
   },
   "scripts": {
     "lint": [
