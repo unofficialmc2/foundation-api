@@ -6,11 +6,11 @@ namespace FoundationApi;
 use HttpException\BadRequestException;
 use JsonException;
 use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use RuntimeException;
 use Slim\App;
-use Psr\Container\ContainerInterface;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
 
 /**
  * Class Controller
@@ -86,15 +86,14 @@ abstract class Controller
      * @param bool $returnAssoc
      * @return mixed
      * @throws BadRequestException
-     * @throws \HttpException\InternalServerException
      */
-    protected function readBodyJson(Request $request, ?callable|Validator $validator = null, bool $returnAssoc = false): mixed
+    protected function readBodyJson(Request $request, null|callable|Validator $validator = null, bool $returnAssoc = false): mixed
     {
         $rawBody = (string)$request->getBody();
         try {
             $data = json_decode($rawBody, $returnAssoc, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException $e) {
-            $this->log()->debug(self::exceptionToString($e), ["body" => $rawBody ]);
+            $this->log()->debug(self::exceptionToString($e), ["body" => $rawBody]);
             throw new BadRequestException("Le format du cops de la requète n'est pas valide.");
         }
         if (null !== $validator) {
