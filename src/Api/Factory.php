@@ -4,6 +4,10 @@ declare(strict_types=1);
 namespace FoundationApi;
 
 use DateTime;
+use FoundationApi\ErrorHandlers\DefaultErrorHandler;
+use FoundationApi\ErrorHandlers\HttpErrorHandler;
+use FoundationApi\ErrorHandlers\NotAllowedErrorHandler;
+use FoundationApi\ErrorHandlers\NotFoundErrorHandler;
 use HttpException\HttpException;
 use InstanceResolver\ResolverClass;
 use Monolog\Formatter\JsonFormatter;
@@ -18,6 +22,9 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Slim\App;
+use Slim\Exception\HttpMethodNotAllowedException;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Middleware\ErrorMiddleware;
 use Slim\Psr7\Factory\ResponseFactory;
 
 /**
@@ -34,16 +41,17 @@ class Factory
         /** @var \FoundationApi\Container $container */
         $container = self::getContainer($config);
         $container->set('resolve', self::getInstanceResolver($container));
-        $container->set(LoggerInterface::class, self::getLogger($config));
+        $logger = self::getLogger($config);
+        $container->set(LoggerInterface::class, $logger);
         $responseFactory = self::getResponseFactory();
 
         $app = new \Slim\App(
             $responseFactory,
             $container
         );
-        $errMiddleware = $app->addErrorMiddleware(true, true, true);
-        $errMiddleware->setErrorHandler(HttpException::class, static function () {
-        });
+
+        $errMiddleware = $app->addErrorMiddleware(false, true, true, $logger);
+        self::registerErrorMiddlewares($container, $errMiddleware);
 
         return $app;
     }
@@ -110,5 +118,20 @@ class Factory
     protected static function getResponseFactory(): ResponseFactoryInterface
     {
         return new ResponseFactory();
+    }
+
+    /**
+     * Méthode pour déclarer les Middlewares de gestion d'erreur
+     * @param Container $container
+     * @param ErrorMiddleware $errMiddleware
+     * @return void
+     */
+    private static function registerErrorMiddlewares(Container $container, ErrorMiddleware $errMiddleware): void
+    {
+        $errMiddleware
+            ->setErrorHandler(HttpNotFoundException::class, NotFoundErrorHandler::class)
+            ->setErrorHandler(HttpMethodNotAllowedException::class, NotAllowedErrorHandler::class)
+            ->setErrorHandler(HttpException::class, HttpErrorHandler::class, true)
+            ->setDefaultErrorHandler(DefaultErrorHandler::class);
     }
 }

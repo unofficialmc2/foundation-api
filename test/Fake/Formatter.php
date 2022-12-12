@@ -34,6 +34,6 @@ class Formatter implements ResponseFormatterInterface
      */
     public function formatDirectError(Response $response, int $code, string $message, $detail = null): Response
     {
-        return $response;
+        return $response->withStatus($code);
     }
 }
