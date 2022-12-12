@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace FoundationApi;
 
-use PHPUnit\Framework\TestCase;
+use Test\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Psr7\Factory\ServerRequestFactory;
 use Test\Fake\Middleware as MiddlewareAlias;

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace FoundationApi;
 
-use PHPUnit\Framework\TestCase;
+use Test\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Psr7\Factory\ResponseFactory;

@@ -10,6 +10,7 @@ use Faker\Factory;
 use Faker\Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase as PhpUnitTestCase;
+use Test\Fake\Formatter;
 
 /**
  * Class TestCase de base pour les tests du projet
@@ -82,5 +83,13 @@ class TestCase extends PhpUnitTestCase
         $url = filter_var($urlCheck, FILTER_SANITIZE_URL);
         $result = filter_var($url, FILTER_VALIDATE_URL) !== false;
         self::assertTrue($result, $message);
+    }
+
+    public function getSettings(): array
+    {
+        return [
+            'logger' => ['path' => __DIR__ . "/../log", 'name' => 'test'],
+            'response-formatter' => ['class' => Formatter::class]
+        ];
     }
 }

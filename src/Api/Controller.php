@@ -7,10 +7,12 @@ use HttpException\BadRequestException;
 use JsonException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use RuntimeException;
 use Slim\App;
+use Slim\Psr7\Factory\ResponseFactory;
 
 /**
  * Class Controller
@@ -23,23 +25,20 @@ abstract class Controller
     use UseExceptionFormatter;
 
     protected ?ResponseFormatterInterface $responseFormatter = null;
-    protected ContainerInterface $container;
 
     /**
      * Controller constructor.
      * @param \Psr\Container\ContainerInterface $container
      */
-    final public function __construct(ContainerInterface $container)
+    public function __construct(protected ContainerInterface $container)
     {
-        $this->container = $container;
-
-        if (!$this->container->has(ResponseFormatterInterface::class)) {
-            throw new RuntimeException("ResponseFormatter n'est pas initialisé");
-        }
-
         if ($this->responseFormatter === null) {
+            if (!$this->container->has('ResponseFormatterClass')) {
+                throw new RuntimeException("ResponseFormatter n'est pas initialisé");
+            }
             try {
-                $this->responseFormatter = $this->container->get(ResponseFormatterInterface::class);
+                $responseFormatterClass = $this->container->get('ResponseFormatterClass');
+                $this->responseFormatter = $this->resolve($responseFormatterClass);
             } catch (ContainerExceptionInterface $e) {
                 $this->log()->debug(self::exceptionToString($e));
                 throw new RuntimeException("Impossible d'initialiser le ResponseFormatter");
@@ -122,5 +121,16 @@ abstract class Controller
             $validator($datas);
         }
         return $datas;
+    }
+
+    /**
+     * Donne une réponse
+     * @param int $code
+     * @return Response
+     */
+    private function getResponse(int $code = 200): ResponseInterface
+    {
+        $factory = new ResponseFactory();
+        return $factory->createResponse($code);
     }
 }

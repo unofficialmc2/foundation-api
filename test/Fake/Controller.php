@@ -5,6 +5,7 @@ namespace Test\Fake;
 
 use FoundationApi\Controller as ApiController;
 use Closure;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -13,6 +14,13 @@ use Psr\Http\Message\ResponseInterface as Response;
  */
 class Controller extends ApiController
 {
+    public function __construct(ContainerInterface $container)
+    {
+        $this->responseFormatter = new Formatter();
+        parent::__construct($container);
+    }
+
+
     private Closure|null $action = null;
 
     /**
