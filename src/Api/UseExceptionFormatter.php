@@ -16,12 +16,12 @@ trait UseExceptionFormatter
      * @param bool $withTrace
      * @return string
      */
-    protected static function exceptionToString(Throwable $err, bool $withTrace): string
+    protected static function exceptionToString(Throwable $err, bool $withTrace = false): string
     {
         if ($withTrace) {
             return sprintf(
                 "Exception : %s (code %d)\nFichier : %s(%d)\nMessage : %s\n%s",
-                get_class($err),
+                $err::class,
                 $err->getCode(),
                 $err->getFile(),
                 $err->getLine(),
@@ -31,7 +31,7 @@ trait UseExceptionFormatter
         }
         return sprintf(
             "Exception : %s (code %d)\nFichier : %s(%d)\nMessage : %s",
-            get_class($err),
+            $err::class,
             $err->getCode(),
             $err->getFile(),
             $err->getLine(),
