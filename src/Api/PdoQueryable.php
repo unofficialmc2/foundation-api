@@ -122,8 +122,8 @@ trait PdoQueryable
     private function changeEncoding(string $value, string $newCharset): string
     {
         $supportedCharset = [];
-        $supportedCharset[] = 'UTF-32';
-        $supportedCharset[] = 'UTF-16';
+        // $supportedCharset[] = 'UTF-32';
+        // $supportedCharset[] = 'UTF-16';
         $supportedCharset[] = 'UTF-8';
         $supportedCharset[] = 'CP1252';
         $supportedCharset[] = 'ISO-8859-15';
