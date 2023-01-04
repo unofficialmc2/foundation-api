@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace FoundationApi;
 
 use PDO;
+use PDOException;
 use PDOStatement;
 use RuntimeException;
 
@@ -14,10 +15,32 @@ use RuntimeException;
 trait PdoQueryable
 {
     protected ?PDO $pdo = null;
+    /** @var false | string $lastDebugDumpParams */
+    protected bool|string $lastDebugDumpParams;
     /** @var array<string,PDOStatement> */
     private array $cache = [];
     private string $charset = 'UTF-8';
     private string $reqSql;
+    private int $lastRowsAffected = 0;
+    private ?string $lastReqSql = null;
+    /** @var array<int|string,mixed> */
+    private array $lastReqParam = [];
+
+    /**
+     * @return null|array{request:string,params:array<int|string,mixed>}
+     */
+    public function getLastReqInfo(): ?array
+    {
+        if ($this->lastReqSql === null) {
+            return null;
+        }
+        $reqSql = str_replace(["\r", "\n"], ' ', $this->lastReqSql);
+        $reqSql = preg_replace('/\s+/', ' ', $reqSql);
+        return [
+            "request" => $reqSql,
+            "params" => $this->lastReqParam
+        ];
+    }
 
     /**
      * @param PDO $pdo
@@ -44,6 +67,17 @@ trait PdoQueryable
     }
 
     /**
+     * Retourne tous les enregistrements
+     * @param array<string|int,mixed> $param
+     * @return array<string,mixed>
+     */
+    protected function fetchAll(array $param = []): array
+    {
+        $fetchAll = $this->execute($param)->fetchAll(PDO::FETCH_ASSOC);
+        return array_map([$this, 'controlOutputEncoding'], $fetchAll);
+    }
+
+    /**
      * Execute la requête SQL
      * @param array<mixed> $params
      * @return PDOStatement
@@ -51,11 +85,21 @@ trait PdoQueryable
     protected function execute(array $params): PDOStatement
     {
         $stm = $this->prepare();
-        if (empty($params)) {
-            $ok = $stm->execute();
-        } else {
-            $params = $this->controlInputEncoding($params);
-            $ok = $stm->execute($params);
+        $this->lastRowsAffected = 0;
+        try {
+            if (empty($params)) {
+                $this->lastReqParam = [];
+                $ok = $stm->execute();
+            } else {
+                $this->lastReqParam = $params;
+                $params = $this->controlInputEncoding($params);
+                $ok = $stm->execute($params);
+            }
+        } catch (PDOException $PDOException) {
+            ob_start();
+            $stm->debugDumpParams();
+            $this->lastDebugDumpParams = ob_get_clean();
+            throw $PDOException;
         }
         if (!$ok) {
             /** @noinspection JsonEncodingApiUsageInspection */
@@ -67,6 +111,7 @@ trait PdoQueryable
                 'avec ' . ($paramsJson ?: 'error...')
             );
         }
+        $this->lastRowsAffected = $stm->rowCount();
         return $stm;
     }
 
@@ -98,7 +143,7 @@ trait PdoQueryable
     }
 
     /**
-     * modifie les charset pour la base de donnée
+     * Modifie les charset pour la base de donnée
      * @param array<string|int,mixed> $elements
      * @return array<string|int,mixed>
      */
@@ -111,7 +156,6 @@ trait PdoQueryable
         }
         return $elements;
     }
-
 
     /**
      * modifie l'encodage d'une chaine
@@ -137,32 +181,6 @@ trait PdoQueryable
     }
 
     /**
-     * modifie les charset pour la sortie php
-     * @param array<string,mixed> $elements
-     * @return array<string,mixed>
-     */
-    private function controlOutputEncoding(array $elements): array
-    {
-        foreach ($elements as $key => $value) {
-            if (is_string($value)) {
-                $elements[$key] = $this->changeEncoding($value, 'UTF-8');
-            }
-        }
-        return $elements;
-    }
-
-    /**
-     * Retourne tous les enregistrements
-     * @param array<string|int,mixed> $param
-     * @return array<string,mixed>
-     */
-    protected function fetchAll(array $param = []): array
-    {
-        $fetchAll = $this->execute($param)->fetchAll(PDO::FETCH_ASSOC);
-        return array_map([$this, 'controlOutputEncoding'], $fetchAll);
-    }
-
-    /**
      * Retourne un enregistrement
      * @param array<string|int,mixed> $param
      * @return array<string,mixed>|null
@@ -174,11 +192,37 @@ trait PdoQueryable
     }
 
     /**
-     * retourne le driver PDO de la base de donnée
+     * Modifie les charset pour la sortie php
+     * @param array<string,mixed> $elements
+     * @return array<string,mixed>
+     */
+    private function controlOutputEncoding(array $elements): array
+    {
+        foreach ($elements as $key => $value) {
+            if (is_string($value)) {
+                $elements[$key] = $this->changeEncoding($value, 'UTF-8');
+            } elseif (is_resource($value)) {
+                $elements[$key] = $this->changeEncoding(stream_get_contents($value), 'UTF-8');
+            }
+        }
+        return $elements;
+    }
+
+    /**
+     * Retourne le driver PDO de la base de donnée
      * @return string
      */
     protected function getDbDriver(): string
     {
         return $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+    }
+
+    /**
+     * Retourne le nombre de lignes affecté par la dernière exécution.
+     * @return int;
+     */
+    protected function getRowsAffected(): int
+    {
+        return $this->lastRowsAffected;
     }
 }
