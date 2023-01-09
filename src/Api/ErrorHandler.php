@@ -93,7 +93,7 @@ abstract class ErrorHandler implements ErrorHandlerInterface
     {
         $settings = $this->container->get('settings');
         $logger = $this->container->get(LoggerInterface::class);
-        if (!isset($settings['response-formatter'], $settings['response-formatter']['class'])) {
+        if (!isset($settings['ResponseFormatterClass'])) {
             throw new RuntimeException(
                 "le nom d'une class ResponseFormatterInterface n'est pas initialisé "
                 . "dans la config (response-formatter/class)"
@@ -101,7 +101,7 @@ abstract class ErrorHandler implements ErrorHandlerInterface
         }
         try {
             /** @var class-string<ResponseFormatterInterface> $responseFormatterClass */
-            $responseFormatterClass = $settings['response-formatter']['class'];
+            $responseFormatterClass = $settings['ResponseFormatterClass'];
             $formatter = new $responseFormatterClass();
             return $formatter->formatDirectError($response, $status, $message, $detail)
                 ->withHeader('Access-Control-Allow-Origin', '*')

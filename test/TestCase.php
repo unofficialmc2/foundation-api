@@ -4,11 +4,9 @@ declare(strict_types=1);
 namespace Test;
 
 use DateTime;
-use DateTimeInterface;
 use Exception;
 use Faker\Factory;
 use Faker\Generator;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase as PhpUnitTestCase;
 use Test\Fake\Formatter;
 
@@ -28,6 +26,35 @@ class TestCase extends PhpUnitTestCase
     {
         parent::__construct($name, $data, $dataName);
         $this->fake = Factory::create('fr_FR');
+    }
+
+    /**
+     * test si la donnée est une Date au bon format
+     * @param string $format
+     * @param string $actual
+     * @param string $message
+     * @retrun void
+     */
+    public static function assertFormattedDate(string $format, string $actual, string $message = ""): void
+    {
+        try {
+            /** @var DateTime|false $date */
+            $date = DateTime::createFromFormat($format, $actual);
+        } catch (Exception $e) {
+            $date = false;
+        }
+        self::assertInstanceOf(DateTime::class, $date, $message);
+    }
+
+    /**
+     * @param string $urlCheck
+     * @param string $message
+     */
+    public static function assertIsUrlString(string $urlCheck, string $message = ""): void
+    {
+        $url = filter_var($urlCheck, FILTER_SANITIZE_URL);
+        $result = filter_var($url, FILTER_VALIDATE_URL) !== false;
+        self::assertTrue($result, $message);
     }
 
     /**
@@ -56,40 +83,11 @@ class TestCase extends PhpUnitTestCase
         }
     }
 
-    /**
-     * test si la donnée est une Date au bon format
-     * @param string $format
-     * @param string $actual
-     * @param string $message
-     * @retrun void
-     */
-    public static function assertFormattedDate(string $format, string $actual, string $message = ""): void
-    {
-        try {
-            /** @var \DateTime|false $date */
-            $date = DateTime::createFromFormat($format, $actual);
-        } catch (Exception $e) {
-            $date = false;
-        }
-        self::assertInstanceOf(DateTime::class, $date, $message);
-    }
-
-    /**
-     * @param string $urlCheck
-     * @param string $message
-     */
-    public static function assertIsUrlString(string $urlCheck, string $message = ""):void
-    {
-        $url = filter_var($urlCheck, FILTER_SANITIZE_URL);
-        $result = filter_var($url, FILTER_VALIDATE_URL) !== false;
-        self::assertTrue($result, $message);
-    }
-
     public function getSettings(): array
     {
         return [
             'logger' => ['path' => __DIR__ . "/../log", 'name' => 'test'],
-            'response-formatter' => ['class' => Formatter::class]
+            'ResponseFormatterClass' => Formatter::class
         ];
     }
 }

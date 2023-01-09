@@ -28,12 +28,16 @@ abstract class Controller
 
     /**
      * Controller constructor.
-     * @param \Psr\Container\ContainerInterface $container
+     * @param ContainerInterface $container
      */
     public function __construct(protected ContainerInterface $container)
     {
         if ($this->responseFormatter === null) {
-            if (!$this->container->has('ResponseFormatterClass')) {
+            if (!$this->container->has('settings')) {
+                throw new RuntimeException("Le container n'est pas correctement initialisé");
+            }
+            $settings = $this->container->has('settings');
+            if (!isset($settings['ResponseFormatterClass'])) {
                 throw new RuntimeException("ResponseFormatter n'est pas initialisé");
             }
             try {
@@ -48,9 +52,9 @@ abstract class Controller
 
     /**
      * Enregistre les routes du controleur
-     * @param \Slim\App $app
+     * @param App $app
      * @param string $groupName
-     * @return \Slim\App
+     * @return App
      */
     public static function register(App $app, string $groupName): App
     {
@@ -80,8 +84,8 @@ abstract class Controller
 
     /**
      * @param Request $request
-     * @param null|callable|\FoundationApi\Validator $validator
-     * @phpstan-param  null|(callable(mixed $data): void)|\FoundationApi\Validator $validator
+     * @param null|callable|Validator $validator
+     * @phpstan-param  null|(callable(mixed $data): void)|Validator $validator
      * @param bool $returnAssoc
      * @return mixed
      * @throws BadRequestException

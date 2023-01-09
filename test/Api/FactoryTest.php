@@ -20,7 +20,7 @@ class FactoryTest extends TestCase
     {
         $app = Factory::create([
             'logger' => ['path' => __DIR__ . "/../log", 'name' => 'test'],
-            'response-formatter' => ['class' => Formatter::class]
+            'ResponseFormatterClass' => Formatter::class
         ]);
         self::assertInstanceOf(App::class, $app);
     }
