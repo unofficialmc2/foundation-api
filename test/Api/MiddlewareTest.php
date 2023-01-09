@@ -3,10 +3,11 @@ declare(strict_types=1);
 
 namespace FoundationApi;
 
-use Test\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Psr7\Factory\ServerRequestFactory;
+use Test\Fake\Formatter;
 use Test\Fake\Middleware as MiddlewareAlias;
+use Test\TestCase;
 
 /**
  * Test de la class Middleware
@@ -16,7 +17,8 @@ class MiddlewareTest extends TestCase
     public static function testAddMiddleware(): void
     {
         $app = Factory::create([
-            "logger"=>["name"=>"test","path" => __DIR__ . "/../log"]
+            "logger" => ["name" => "test", "path" => __DIR__ . "/../log"],
+            'ResponseFormatterClass' => Formatter::class
         ]);
         $app->add(MiddlewareAlias::class);
         $assert = self::assertTrue(...);

@@ -22,7 +22,7 @@ class HandlerErrorMiddlewareTest extends TestCase
     {
         $app = Factory::create([
             'logger' => ['path' => __DIR__ . "/../log", 'name' => 'test'],
-            'response-formatter' => ['class' => Formatter::class]
+            'ResponseFormatterClass' => Formatter::class
         ]);
         $app->get('/', function () {
             throw new RuntimeException("test");
@@ -40,7 +40,7 @@ class HandlerErrorMiddlewareTest extends TestCase
     {
         $app = Factory::create([
             'logger' => ['path' => __DIR__ . "/../log", 'name' => 'test'],
-            'response-formatter' => ['class' => Formatter::class]
+            'ResponseFormatterClass' => Formatter::class
         ]);
         $app->get('/maison', function () {
             throw new RuntimeException("test");
@@ -59,7 +59,7 @@ class HandlerErrorMiddlewareTest extends TestCase
     {
         $app = Factory::create([
             'logger' => ['path' => __DIR__ . "/../log", 'name' => 'test'],
-            'response-formatter' => ['class' => Formatter::class]
+            'ResponseFormatterClass' => Formatter::class
         ]);
         $app->post('/', function () {
             throw new RuntimeException("test");
@@ -77,7 +77,7 @@ class HandlerErrorMiddlewareTest extends TestCase
     {
         $app = Factory::create([
             'logger' => ['path' => __DIR__ . "/../log", 'name' => 'test'],
-            'response-formatter' => ['class' => Formatter::class]
+            'ResponseFormatterClass' => Formatter::class
         ]);
         $app->get('/', function () {
             throw new NotFoundException("test");
