@@ -201,9 +201,16 @@ trait PdoQueryable
         foreach ($elements as $key => $value) {
             if (is_string($value)) {
                 $elements[$key] = $this->changeEncoding($value, 'UTF-8');
-            } elseif (is_resource($value)) {
+            }
+            /*
+             * Cette partie diverge entre l'API et les WS
+             * - a été intégré au code suite à l'intégration de WS
+             * - retiré du code car génère une erreur dans l'API
+             *
+            elseif (is_resource($value)) {
                 $elements[$key] = $this->changeEncoding(stream_get_contents($value), 'UTF-8');
             }
+            */
         }
         return $elements;
     }
