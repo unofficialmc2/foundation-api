@@ -45,8 +45,7 @@ abstract class Controller
                 throw new RuntimeException("ResponseFormatter n'est pas initialisé");
             }
             try {
-                $responseFormatterClass = $this->container->get('ResponseFormatterClass');
-                $this->responseFormatter = $this->resolve($responseFormatterClass);
+                $this->responseFormatter = $this->resolve($settings['ResponseFormatterClass']);
             } catch (ContainerExceptionInterface $e) {
                 $this->log()->debug(self::exceptionToString($e));
                 throw new RuntimeException("Impossible d'initialiser le ResponseFormatter");
