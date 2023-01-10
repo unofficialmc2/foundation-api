@@ -36,7 +36,11 @@ abstract class Controller
             if (!$this->container->has('settings')) {
                 throw new RuntimeException("Le container n'est pas correctement initialisé");
             }
-            $settings = $this->container->has('settings');
+            /**
+             * la présence de settings est testé juste avant
+             * @noinspection PhpUnhandledExceptionInspection
+             */
+            $settings = $this->container->get('settings');
             if (!isset($settings['ResponseFormatterClass'])) {
                 throw new RuntimeException("ResponseFormatter n'est pas initialisé");
             }
