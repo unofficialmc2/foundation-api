@@ -14,27 +14,27 @@ interface ResponseFormatterInterface
     /**
      * Formate une réponse avec succes avec un objet $data
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param object|array<mixed>|null $data (null par defaut)
+     * @param mixed $data (null par defaut)
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function formatSuccess(Response $response, array|object|null $data = null): Response;
+    public function formatSuccess(Response $response, mixed $data = null): Response;
 
     /**
      * Formate une réponse redirect avec un objet $data
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param string $url
-     * @param object|array<mixed>|null $data (null par defaut)
+     * @param mixed $data (null par defaut)
      * @return Response
      */
-    public function formatRedirect(Response $response, string $url, array|object|null $data = null): Response;
+    public function formatRedirect(Response $response, string $url, mixed $data = null): Response;
 
     /**
      * Formate une réponse avec erreur en spécifiant tout les elements
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param integer $code
      * @param string $message
-     * @param object|array<mixed>|null $detail
+     * @param mixed $detail
      * @return Response
      */
-    public function formatDirectError(Response $response, int $code, string $message, array|object|null $detail = null): Response;
+    public function formatDirectError(Response $response, int $code, string $message, mixed $detail = null): Response;
 }
