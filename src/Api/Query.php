@@ -80,7 +80,13 @@ abstract class Query
                     continue;
                 }
                 switch (strtolower($info[1] ?? '')) {
+                    case 'float':
+                    case 'real':
+                    case 'double':
+                        $newItem[$info[0]] = (double)$fetch[$property];
+                        break;
                     case 'int':
+                    case 'integer':
                         $newItem[$info[0]] = (int)$fetch[$property];
                         break;
                     case 'timestamp':
@@ -99,6 +105,7 @@ abstract class Query
                         $newItem[$info[0]] = $tmp->format('Y-m-d');
                         break;
                     case 'str':
+                    case 'string':
                         //$tmp = htmlentities($fetch[$property], ENT_COMPAT | ENT_HTML401, 'cp1252');
                         //$newItem[$info[0]] = html_entity_decode($tmp, ENT_COMPAT | ENT_HTML401);
                         $newItem[$info[0]] = (string)$fetch[$property];
