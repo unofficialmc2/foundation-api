@@ -40,12 +40,12 @@ class Factory
     {
         /** @var \FoundationApi\Container $container */
         $container = self::getContainer($config);
-        $container->set('resolve', self::getInstanceResolver($container));
+        $container->set(ResolverClass::class, self::getInstanceResolver($container));
         $logger = self::getLogger($config);
         $container->set(LoggerInterface::class, $logger);
         $responseFactory = self::getResponseFactory();
 
-        $app = new \Slim\App(
+        $app = new App(
             $responseFactory,
             $container
         );
