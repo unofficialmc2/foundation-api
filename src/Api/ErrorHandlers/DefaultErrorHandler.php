@@ -31,8 +31,13 @@ class DefaultErrorHandler extends ErrorHandler
         $logger = $this->container->get(LoggerInterface::class);
         $response = (new ResponseFactory())->createResponse();
         $logger->warning(
-            "Une erreur s'est produite dans ". __METHOD__ ." :" . PHP_EOL .
-            "(" . $exception->getCode() . ") " . $exception->getMessage()
+            "Une erreur s'est produite :" . PHP_EOL . $exception::class .
+            "(" . $exception->getCode() . ") " . $exception->getMessage(),
+            [
+                "file" => $exception->getFile(),
+                "line" => $exception->getLine(),
+                "trace" => $exception->getTrace()
+            ]
         );
         $this->logException($logger, $exception);
         $this->logRequest($logger, $request);

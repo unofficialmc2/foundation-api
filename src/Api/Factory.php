@@ -40,9 +40,10 @@ class Factory
     {
         /** @var \FoundationApi\Container $container */
         $container = self::getContainer($config);
-        $container->set(ResolverClass::class, self::getInstanceResolver($container));
+        $resolver = self::getInstanceResolver($container);
+        $container->set(ResolverClass::class, static fn () => $resolver);
         $logger = self::getLogger($config);
-        $container->set(LoggerInterface::class, $logger);
+        $container->set(LoggerInterface::class, static fn () => $logger);
         $responseFactory = self::getResponseFactory();
 
         $app = new App(
