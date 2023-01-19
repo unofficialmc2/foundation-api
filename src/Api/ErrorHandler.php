@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace FoundationApi;
 
@@ -25,6 +26,9 @@ abstract class ErrorHandler implements ErrorHandlerInterface
     {
     }
 
+    /**
+     * Methode principal du handler
+     */
     abstract public function __invoke(ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails, bool $logErrors, bool $logErrorDetails): ResponseInterface;
 
     /**
@@ -117,7 +121,6 @@ abstract class ErrorHandler implements ErrorHandlerInterface
      * Log une exception
      * @param LoggerInterface $logger
      * @param Throwable $err
-     * @throws JsonException
      */
     protected function logException(LoggerInterface $logger, Throwable $err): void
     {
