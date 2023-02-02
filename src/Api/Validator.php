@@ -42,7 +42,7 @@ abstract class Validator
 
         $this->logger = $logger;
         if (!self::$translatorInitialised) {
-            $translator = new Translator(__DIR__ . '/../translate', 'fr');
+            $translator = new Translator('./translate', 'fr');
             Factory::setDefaultInstance(
                 (new Factory())->withTranslator($translator)
             );
