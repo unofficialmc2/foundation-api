@@ -83,6 +83,10 @@ class TestCase extends PhpUnitTestCase
         }
     }
 
+    /**
+     * Retourne un settings de base pour les tests
+     * @return array<string,mixed>
+     */
     public function getSettings(): array
     {
         return [

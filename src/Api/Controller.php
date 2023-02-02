@@ -135,7 +135,7 @@ abstract class Controller
      * @param int $code
      * @return Response
      */
-    private function getResponse(int $code = 200): ResponseInterface
+    protected function getResponse(int $code = 200): ResponseInterface
     {
         $factory = new ResponseFactory();
         return $factory->createResponse($code);

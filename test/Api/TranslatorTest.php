@@ -17,7 +17,7 @@ class TranslatorTest extends TestCase
      */
     public function testConstructor(): void
     {
-        if(is_file(self::DIRECTORY . 'lang_fr.json')) {
+        if (is_file(self::DIRECTORY . 'lang_fr.json')) {
             unlink(self::DIRECTORY . 'lang_fr.json');
         }
         $t = new Translator(self::DIRECTORY, 'fr');
