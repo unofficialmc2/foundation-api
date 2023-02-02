@@ -16,7 +16,7 @@ class Formatter implements ResponseFormatterInterface
     /**
      * @inheritDoc
      */
-    public function formatSuccess(Response $response, array|object $data = null): Response
+    public function formatSuccess(Response $response, mixed $data = null): Response
     {
         return $response;
     }

@@ -59,8 +59,10 @@ class Translator
             if (is_array($content)) {
                 $this->translationDictionary = $content;
             }
-            $this->nbTranslation = count($this->translationDictionary);
+        } else {
+            $this->translationDictionary = [];
         }
+        $this->nbTranslation = count($this->translationDictionary);
     }
 
     /**
@@ -88,9 +90,13 @@ class Translator
         try {
             if (count($this->translationDictionary) !== $this->nbTranslation) {
                 $json = json_encode($this->translationDictionary, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
+                $newFile = !is_file($this->filename);
                 if (file_put_contents($this->filename, $json) === false) {
                     throw new RuntimeException("Erreur d'écriture dans " . $this->filename);
                 }
+                // if ($newFile) {
+                chmod($this->filename, 0664);
+                // }
                 $this->nbTranslation = count($this->translationDictionary);
             }
         } catch (Exception $e) {
