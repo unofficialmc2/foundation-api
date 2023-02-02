@@ -106,13 +106,19 @@ abstract class Query
                         break;
                     case 'str':
                     case 'string':
-                        //$tmp = htmlentities($fetch[$property], ENT_COMPAT | ENT_HTML401, 'cp1252');
-                        //$newItem[$info[0]] = html_entity_decode($tmp, ENT_COMPAT | ENT_HTML401);
-                        $newItem[$info[0]] = (string)$fetch[$property];
+                        if (is_resource($fetch[$property])) {
+                            $newItem[$info[0]] = stream_get_contents($fetch[$property]);
+                        } else {
+                            $newItem[$info[0]] = (string)$fetch[$property];
+                        }
                         break;
                     case 'bool':
                     case 'boolean':
                         $newItem[$info[0]] = (bool)$fetch[$property];
+                        break;
+                    case 'stream':
+                    case 'resource':
+                        $newItem[$info[0]] = $fetch[$property];
                         break;
                     default:
                         $newItem[$info[0]] = $fetch[$property];
