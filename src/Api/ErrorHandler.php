@@ -53,8 +53,29 @@ abstract class ErrorHandler implements ErrorHandlerInterface
         $logger->notice($this->getRequestBasicsFormatted($request));
         $logger->debug($this->getRequestHeaderFormatted($request));
         $body = (string)$request->getBody();
+        if (str_contains($body, "password")) {
+            $body = $this->replacePassWord($logger, $body);
+        }
         if (!empty($body)) {
             $logger->debug($body);
+        }
+    }
+
+    /**
+     * Fonction qui remplace les mots de passe en clair part des étoiles
+     * @param LoggerInterface $logger
+     * @param string $message
+     * @return string
+     */
+    final protected function replacePassWord(LoggerInterface $logger, string $message): string
+    {
+        try {
+            $jsonMessage = json_decode($message, true, 512, JSON_THROW_ON_ERROR);
+            $jsonMessage["password"]= "***********";
+            return json_encode($jsonMessage, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $_) {
+            $logger->critical("Le mot de passe n'a pas pu être encodée");
+            return $message;
         }
     }
 
