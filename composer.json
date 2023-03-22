@@ -25,7 +25,8 @@
     "pimple/pimple": "^3.5",
     "slim/http": "^1.2",
     "slim/psr7": "^1.5",
-    "slim/slim": "^4.10"
+    "slim/slim": "^4.10",
+    "ext-mbstring": "*"
   },
   "require-dev": {
     "fakerphp/faker": "^1.20",

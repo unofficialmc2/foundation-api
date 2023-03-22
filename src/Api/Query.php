@@ -107,7 +107,7 @@ abstract class Query
                     case 'str':
                     case 'string':
                         if (is_resource($fetch[$property])) {
-                            $newItem[$info[0]] = stream_get_contents($fetch[$property]);
+                            $newItem[$info[0]] = self::changeEncoding(stream_get_contents($fetch[$property]), "UTF-8");
                         } else {
                             $newItem[$info[0]] = (string)$fetch[$property];
                         }
@@ -154,5 +154,28 @@ abstract class Query
             }
             return $newData;
         };
+    }
+
+    /**
+     * modifie l'encodage d'une chaine
+     * @param string $value
+     * @param string $newCharset
+     * @return string
+     */
+    private static function changeEncoding(string $value, string $newCharset): string
+    {
+        $supportedCharset = [];
+        // $supportedCharset[] = 'UTF-32';
+        // $supportedCharset[] = 'UTF-16';
+        $supportedCharset[] = 'UTF-8';
+        $supportedCharset[] = 'CP1252';
+        $supportedCharset[] = 'ISO-8859-15';
+        $supportedCharset[] = 'ISO-8859-1';
+        $supportedCharset[] = 'ASCII';
+        $charset = mb_detect_encoding($value, $supportedCharset, true);
+        if ($newCharset !== $charset) {
+            return mb_convert_encoding($value, $newCharset, $charset);
+        }
+        return $value;
     }
 }
