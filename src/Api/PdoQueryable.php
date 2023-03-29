@@ -128,7 +128,7 @@ trait PdoQueryable
             throw new RuntimeException("Il n'y a pas de requêtes initialisée dans " . static::class);
         }
         $reqSql = $this->reqSql;
-        $keyReq = md5($reqSql);
+        $keyReq = hash('sha256', $reqSql);
         if (array_key_exists($keyReq, $this->cache)) {
             return $this->cache[$keyReq];
         }
