@@ -128,7 +128,7 @@ trait PdoQueryable
             throw new RuntimeException("Il n'y a pas de requêtes initialisée dans " . static::class);
         }
         $reqSql = $this->reqSql;
-        $keyReq = md5($reqSql);
+        $keyReq = hash('sha256', $reqSql);
         if (array_key_exists($keyReq, $this->cache)) {
             return $this->cache[$keyReq];
         }
@@ -166,8 +166,13 @@ trait PdoQueryable
     private function changeEncoding(string $value, string $newCharset): string
     {
         $supportedCharset = [];
-        // $supportedCharset[] = 'UTF-32';
-        // $supportedCharset[] = 'UTF-16';
+        /*
+         * Commenté car génère un bug en php8.1
+         * "[]" -> "楷"
+         *
+        $supportedCharset[] = 'UTF-32';
+        $supportedCharset[] = 'UTF-16';
+         */
         $supportedCharset[] = 'UTF-8';
         $supportedCharset[] = 'CP1252';
         $supportedCharset[] = 'ISO-8859-15';
