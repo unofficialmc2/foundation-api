@@ -80,7 +80,7 @@ class Factory
      * @param array<string,mixed> $config
      * @return \Psr\Log\LoggerInterface
      */
-    protected static function getLogger(array $config): LoggerInterface
+    public static function getLogger(array $config): LoggerInterface
     {
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ipClient = $_SERVER['HTTP_CLIENT_IP'];
