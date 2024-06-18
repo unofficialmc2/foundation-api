@@ -28,6 +28,14 @@ class DynamicLogger implements LoggerInterface
 
     private function initializeLogger(string $logPath): void
     {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ipClient = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ipClient = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ipClient = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+        }
+
         $this->logger = new Logger($this->config['logger']['name']);
         $this->logPath = $logPath;
 
@@ -36,11 +44,11 @@ class DynamicLogger implements LoggerInterface
 
         $this->logger->pushProcessor(new UidProcessor());
         $this->logger->pushProcessor(new IntrospectionProcessor());
-        $this->logger->pushProcessor(static function ($record) {
+        $this->logger->pushProcessor(static function ($record) use ($ipClient){
             $record['extra']['info'] = [
                 'REQUEST_METHOD' => $_SERVER['REQUEST_METHOD'] ?? '?',
                 'REQUEST_URI' => $_SERVER['REQUEST_URI'] ?? '?',
-                'IP' => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+                'IP' => $ipClient,
                 'USER_AGENT' => $_SERVER['HTTP_USER_AGENT'] ?? '?'
             ];
             return $record;
