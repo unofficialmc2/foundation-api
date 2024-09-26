@@ -32,18 +32,6 @@ abstract class ErrorHandler implements ErrorHandlerInterface
     abstract public function __invoke(ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails, bool $logErrors, bool $logErrorDetails): ResponseInterface;
 
     /**
-     * @param string $message
-     * @return string
-     */
-    protected function utf8Encode(string $message): string
-    {
-        if (!str_contains($message, "\\u")) {
-            return utf8_encode($message);
-        }
-        return $message;
-    }
-
-    /**
      * log une requête
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Psr\Http\Message\ServerRequestInterface $request
