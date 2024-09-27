@@ -30,7 +30,6 @@
   },
   "require-dev": {
     "fakerphp/faker": "^1.20",
-    "fzed51/version": "^2.0",
     "ocramius/package-versions": "^2.6",
     "phpstan/phpstan": "^1.8",
     "phpunit/phpunit": "^11.3",
@@ -38,9 +37,7 @@
   },
   "suggest": {
     "firebase/php-jwt": "pour la gestion des JWT",
-    "fzed51/spicy-mash": "pour simplifier l'utilisation d'openSSL",
-    "phpmailer/phpmailer": "pour l'es envoie d'e-mail",
-    "fzed51/info-client": "pour interpréter les information du client"
+    "phpmailer/phpmailer": "pour les envois d'e-mail"
   },
   "config": {
     "sort-packages": true

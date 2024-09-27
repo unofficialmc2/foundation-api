@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10a20cb3f117b8f662728201f63f0a17",
+    "content-hash": "7dc438d2781cfab6d5146463cfee3d24",
     "packages": [
         {
             "name": "fig/http-message-util",
@@ -1537,103 +1537,6 @@
                 "source": "https://github.com/FakerPHP/Faker/tree/v1.23.1"
             },
             "time": "2024-01-02T13:46:09+00:00"
-        },
-        {
-            "name": "fzed51/console-options",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fzed51/console-options.git",
-                "reference": "2ff65bb78ffcd7e70ef75189a715e664e78b8fff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzed51/console-options/zipball/2ff65bb78ffcd7e70ef75189a715e664e78b8fff",
-                "reference": "2ff65bb78ffcd7e70ef75189a715e664e78b8fff",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "ocramius/package-versions": "^2.5",
-                "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.5",
-                "squizlabs/php_codesniffer": "^3.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Console\\Options\\": "./src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Sanchez",
-                    "email": "fzed51@users.noreply.github.com"
-                }
-            ],
-            "description": "option parser pour ligne de commande PHP",
-            "support": {
-                "issues": "https://github.com/fzed51/console-options/issues",
-                "source": "https://github.com/fzed51/console-options/tree/v2.0.0"
-            },
-            "time": "2022-09-29T15:32:47+00:00"
-        },
-        {
-            "name": "fzed51/version",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fzed51/version.git",
-                "reference": "f78abfe465ba4155f6cbed856b518cf819fece60"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzed51/version/zipball/f78abfe465ba4155f6cbed856b518cf819fece60",
-                "reference": "f78abfe465ba4155f6cbed856b518cf819fece60",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "fzed51/console-options": "^2.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "ocramius/package-versions": "^2.6",
-                "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.5",
-                "squizlabs/php_codesniffer": "^3.7"
-            },
-            "bin": [
-                "./src/bin/version-manager"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Version\\": "src/Version/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Sanchez",
-                    "email": "fzed51+git@gmail.com"
-                }
-            ],
-            "description": "Class permet de manipuler des numeros de version",
-            "support": {
-                "issues": "https://github.com/fzed51/version/issues",
-                "source": "https://github.com/fzed51/version/tree/v2.0.0"
-            },
-            "time": "2022-10-16T14:26:58+00:00"
         },
         {
             "name": "myclabs/deep-copy",
