@@ -268,22 +268,27 @@
         },
         {
             "name": "psr/container",
-            "version": "1.1.2",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea"
+                "reference": "c71ecc56dfe541dbd90c5360474fbc405f8d5963"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/513e0666f7216c7459170d56df27dfcefe1689ea",
-                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/c71ecc56dfe541dbd90c5360474fbc405f8d5963",
+                "reference": "c71ecc56dfe541dbd90c5360474fbc405f8d5963",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Psr\\Container\\": "src/"
@@ -310,9 +315,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-fig/container/issues",
-                "source": "https://github.com/php-fig/container/tree/1.1.2"
+                "source": "https://github.com/php-fig/container/tree/2.0.2"
             },
-            "time": "2021-11-05T16:50:12+00:00"
+            "time": "2021-11-05T16:47:00+00:00"
         },
         {
             "name": "psr/http-factory",
@@ -1189,25 +1194,25 @@
         },
         {
             "name": "unofficialmc2/console-options",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unofficialmc2/console-options.git",
-                "reference": "6dc350babe9760f4a4567bca6222ef173df80435"
+                "reference": "3d6149d2aeef4a1f0d2d4907e7571d57f710004b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unofficialmc2/console-options/zipball/6dc350babe9760f4a4567bca6222ef173df80435",
-                "reference": "6dc350babe9760f4a4567bca6222ef173df80435",
+                "url": "https://api.github.com/repos/unofficialmc2/console-options/zipball/3d6149d2aeef4a1f0d2d4907e7571d57f710004b",
+                "reference": "3d6149d2aeef4a1f0d2d4907e7571d57f710004b",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.1"
+                "php": "^8.3"
             },
             "require-dev": {
                 "ocramius/package-versions": "^2.5",
                 "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.5",
+                "phpunit/phpunit": "^11.3",
                 "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "library",
@@ -1228,32 +1233,32 @@
             ],
             "description": "option parser pour ligne de commande PHP",
             "support": {
-                "source": "https://github.com/unofficialmc2/console-options/tree/v2.0.1"
+                "source": "https://github.com/unofficialmc2/console-options/tree/v2.1.0"
             },
-            "time": "2023-02-21T10:35:56+00:00"
+            "time": "2024-09-26T13:38:16+00:00"
         },
         {
             "name": "unofficialmc2/http-exception",
-            "version": "v3.0.1",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unofficialmc2/http-exception.git",
-                "reference": "426a794592ddab6564452590faa6f4c967a37b96"
+                "reference": "7031c7c6cd68a07aeabf70b26f4f5cbfd1e2b9c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unofficialmc2/http-exception/zipball/426a794592ddab6564452590faa6f4c967a37b96",
-                "reference": "426a794592ddab6564452590faa6f4c967a37b96",
+                "url": "https://api.github.com/repos/unofficialmc2/http-exception/zipball/7031c7c6cd68a07aeabf70b26f4f5cbfd1e2b9c9",
+                "reference": "7031c7c6cd68a07aeabf70b26f4f5cbfd1e2b9c9",
                 "shasum": ""
             },
             "require": {
-                "php": ">8.0"
+                "php": "^8.3"
             },
             "require-dev": {
                 "ocramius/package-versions": "^2.1",
-                "phpstan/phpstan": "^0.12.33",
-                "phpunit/phpunit": "^9.2",
-                "squizlabs/php_codesniffer": "3.7.1"
+                "phpstan/phpstan": "^1.12",
+                "phpunit/phpunit": "^11.3",
+                "squizlabs/php_codesniffer": "^3.10"
             },
             "type": "library",
             "autoload": {
@@ -1274,31 +1279,31 @@
             "description": "Collection d'exception pour gérer les erreurs http",
             "homepage": "https://github.com/unofficialmc2/http-exception",
             "support": {
-                "source": "https://github.com/unofficialmc2/http-exception/tree/v3.0.1"
+                "source": "https://github.com/unofficialmc2/http-exception/tree/v3.1.0"
             },
-            "time": "2023-02-17T14:58:04+00:00"
+            "time": "2024-09-26T13:25:01+00:00"
         },
         {
             "name": "unofficialmc2/instance-resolver",
-            "version": "v2.1.1",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unofficialmc2/instance-resolver.git",
-                "reference": "c306f19d3f513f6a53205e8f75f3d20fa4c0909f"
+                "reference": "721e992d73cec2f5afb0dcdd1cff5f8375e14a4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unofficialmc2/instance-resolver/zipball/c306f19d3f513f6a53205e8f75f3d20fa4c0909f",
-                "reference": "c306f19d3f513f6a53205e8f75f3d20fa4c0909f",
+                "url": "https://api.github.com/repos/unofficialmc2/instance-resolver/zipball/721e992d73cec2f5afb0dcdd1cff5f8375e14a4f",
+                "reference": "721e992d73cec2f5afb0dcdd1cff5f8375e14a4f",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.1",
-                "psr/container": "^1.0"
+                "php": "^8.3",
+                "psr/container": "^2.0"
             },
             "require-dev": {
                 "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.3",
+                "phpunit/phpunit": "^11.3",
                 "pimple/pimple": "^3.2",
                 "squizlabs/php_codesniffer": "^3.5"
             },
@@ -1320,36 +1325,36 @@
             ],
             "description": "Resolver d'instance, auto link",
             "support": {
-                "source": "https://github.com/unofficialmc2/instance-resolver/tree/v2.1.1"
+                "source": "https://github.com/unofficialmc2/instance-resolver/tree/v2.2.0"
             },
-            "time": "2023-02-17T15:01:41+00:00"
+            "time": "2024-09-26T13:55:30+00:00"
         },
         {
             "name": "unofficialmc2/migration",
-            "version": "v2.0.2",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unofficialmc2/migration.git",
-                "reference": "c4fc8e67accaa9d1170a2a5ea58c2057cc0b4b89"
+                "reference": "0b138fe8121cd303dd198c56bd61e3903b99f48c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unofficialmc2/migration/zipball/c4fc8e67accaa9d1170a2a5ea58c2057cc0b4b89",
-                "reference": "c4fc8e67accaa9d1170a2a5ea58c2057cc0b4b89",
+                "url": "https://api.github.com/repos/unofficialmc2/migration/zipball/0b138fe8121cd303dd198c56bd61e3903b99f48c",
+                "reference": "0b138fe8121cd303dd198c56bd61e3903b99f48c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-pdo": "*",
-                "php": "^8.1",
+                "php": "^8.3",
                 "unofficialmc2/console-options": "^2.0",
                 "unofficialmc2/pdo-helper": "^2.0"
             },
             "require-dev": {
                 "ocramius/package-versions": "^2.5",
                 "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.5",
+                "phpunit/phpunit": "^11.3",
                 "squizlabs/php_codesniffer": "^3.5"
             },
             "bin": [
@@ -1373,31 +1378,31 @@
             ],
             "description": "Outil de migration de base de donnée",
             "support": {
-                "source": "https://github.com/unofficialmc2/migration/tree/v2.0.2"
+                "source": "https://github.com/unofficialmc2/migration/tree/v2.1.0"
             },
-            "time": "2023-02-22T08:46:12+00:00"
+            "time": "2024-09-26T13:26:37+00:00"
         },
         {
             "name": "unofficialmc2/pdo-helper",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unofficialmc2/pdo-helper.git",
-                "reference": "30e86b72a93940420878d196c9294b5b35f6c25a"
+                "reference": "c94111c30b5287c430741f5f2401bf83aeded12c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unofficialmc2/pdo-helper/zipball/30e86b72a93940420878d196c9294b5b35f6c25a",
-                "reference": "30e86b72a93940420878d196c9294b5b35f6c25a",
+                "url": "https://api.github.com/repos/unofficialmc2/pdo-helper/zipball/c94111c30b5287c430741f5f2401bf83aeded12c",
+                "reference": "c94111c30b5287c430741f5f2401bf83aeded12c",
                 "shasum": ""
             },
             "require": {
                 "ext-pdo": "*",
-                "php": "^8.1"
+                "php": "^8.3"
             },
             "require-dev": {
                 "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.2",
+                "phpunit/phpunit": "^11.3",
                 "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "library",
@@ -1418,32 +1423,32 @@
             ],
             "description": "Helper pour faciliter l'initialisation d'objet PDO",
             "support": {
-                "source": "https://github.com/unofficialmc2/pdo-helper/tree/v2.0.1"
+                "source": "https://github.com/unofficialmc2/pdo-helper/tree/v2.1.0"
             },
-            "time": "2023-02-17T15:33:56+00:00"
+            "time": "2024-09-26T13:25:59+00:00"
         },
         {
             "name": "unofficialmc2/respect-validation-wrapper",
-            "version": "v4.1.4",
+            "version": "v4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unofficialmc2/respect-validation-wrapper.git",
-                "reference": "784b9ae02ed812e8c18b90fd8065773b264f637e"
+                "reference": "ffae2fbc0d6cb809e74955135bbd98b5d25138ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unofficialmc2/respect-validation-wrapper/zipball/784b9ae02ed812e8c18b90fd8065773b264f637e",
-                "reference": "784b9ae02ed812e8c18b90fd8065773b264f637e",
+                "url": "https://api.github.com/repos/unofficialmc2/respect-validation-wrapper/zipball/ffae2fbc0d6cb809e74955135bbd98b5d25138ae",
+                "reference": "ffae2fbc0d6cb809e74955135bbd98b5d25138ae",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.1",
+                "php": "^8.3",
                 "respect/validation": "^2.2"
             },
             "require-dev": {
                 "ocramius/package-versions": ">2",
                 "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.5",
+                "phpunit/phpunit": "^11.3",
                 "squizlabs/php_codesniffer": "^3.7"
             },
             "type": "library",
@@ -1464,9 +1469,9 @@
             ],
             "description": "wrapper pour la librairie de validation Respect/Validation",
             "support": {
-                "source": "https://github.com/unofficialmc2/respect-validation-wrapper/tree/v4.1.4"
+                "source": "https://github.com/unofficialmc2/respect-validation-wrapper/tree/v4.2.0"
             },
-            "time": "2023-03-22T08:43:01+00:00"
+            "time": "2024-09-26T13:27:18+00:00"
         }
     ],
     "packages-dev": [
@@ -1930,16 +1935,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.4",
+            "version": "1.12.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "ffa517cb918591b93acc9b95c0bebdcd0e4538bd"
+                "reference": "7e6c6cb7cecb0a6254009a1a8a7d54ec99812b17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ffa517cb918591b93acc9b95c0bebdcd0e4538bd",
-                "reference": "ffa517cb918591b93acc9b95c0bebdcd0e4538bd",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7e6c6cb7cecb0a6254009a1a8a7d54ec99812b17",
+                "reference": "7e6c6cb7cecb0a6254009a1a8a7d54ec99812b17",
                 "shasum": ""
             },
             "require": {
@@ -1984,7 +1989,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-19T07:58:01+00:00"
+            "time": "2024-09-26T12:45:22+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
