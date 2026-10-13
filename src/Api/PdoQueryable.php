@@ -165,24 +165,15 @@ trait PdoQueryable
      */
     private function changeEncoding(string $value, string $newCharset): string
     {
-        $supportedCharset = [];
-        /*
-         * Commenté car génère un bug en php8.1
-         * "[]" -> "楷"
-         *
-        $supportedCharset[] = 'UTF-32';
-        $supportedCharset[] = 'UTF-16';
-         */
-        $supportedCharset[] = 'UTF-8';
-        $supportedCharset[] = 'CP1252';
-        $supportedCharset[] = 'ISO-8859-15';
-        $supportedCharset[] = 'ISO-8859-1';
-        $supportedCharset[] = 'ASCII';
-        $charset = mb_detect_encoding($value, $supportedCharset, true);
-        if ($newCharset !== $charset) {
-            return mb_convert_encoding($value, $newCharset, $charset);
+        // une chaîne UTF-8 valide n'est pas devinée : depuis PHP 8.4, mb_detect_encoding répond CP1252 pour
+        // un texte UTF-8 contenant « œ » (octets C5 93), et le texte était reconverti à tort (« Å“ »)
+        $charset = mb_check_encoding($value, 'UTF-8')
+            ? 'UTF-8'
+            : mb_detect_encoding($value, ['CP1252', 'ISO-8859-15', 'ISO-8859-1'], true);
+        if ($charset === false || $charset === $newCharset) {
+            return $value;
         }
-        return $value;
+        return mb_convert_encoding($value, $newCharset, $charset);
     }
 
     /**
