@@ -55,9 +55,10 @@ abstract class Controller
 
     /**
      * Enregistre les routes du controleur
-     * @param App $app
+     * @template TContainer of \Psr\Container\ContainerInterface|null
+     * @param App<TContainer> $app
      * @param string $groupName
-     * @return App
+     * @return App<TContainer>
      */
     public static function register(App $app, string $groupName): App
     {
@@ -116,7 +117,7 @@ abstract class Controller
      */
     protected function readParams(Request $request, ?callable $validator = null): array
     {
-        /** @var array<string,mixed>|null $datas */
+        /** @var array<string,mixed> $datas */
         $datas = $request->getQueryParams();
         // netoyage de l'encodage URL
         foreach ($datas as $key => $data) {

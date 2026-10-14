@@ -43,13 +43,10 @@ class Controller extends ApiController
      */
     public function setCustomAction(callable|Closure $action): void
     {
-        if (is_callable($action)) {
-            /**
-             * Syntax non simplifiée pour que le sens de cette ligne soit explicite
-             * @noinspection PhpClosureCanBeConvertedToFirstClassCallableInspection
-             */
-            $action = Closure::fromCallable($action);
-        }
-        $this->action = $action;
+        /**
+         * Syntax non simplifiée pour que le sens de cette ligne soit explicite
+         * @noinspection PhpClosureCanBeConvertedToFirstClassCallableInspection
+         */
+        $this->action = Closure::fromCallable($action);
     }
 }

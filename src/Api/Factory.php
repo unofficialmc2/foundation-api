@@ -34,7 +34,7 @@ class Factory
 {
     /**
      * @param array<string,mixed> $config
-     * @return \Slim\App
+     * @return \Slim\App<\FoundationApi\Container>
      */
     public static function create(array $config): App
     {

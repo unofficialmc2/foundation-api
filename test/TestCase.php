@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Test;
 
 use DateTime;
-use Exception;
 use Faker\Factory;
 use Faker\Generator;
 use PHPUnit\Framework\TestCase as PhpUnitTestCase;
@@ -18,13 +17,12 @@ class TestCase extends PhpUnitTestCase
     protected Generator $fake;
 
     /**
-     * TestCase constructor.
-     * @inheritDoc
-     * @phpstan-ignore-next-line : problème de doc de PhpUnit
+     * Initialise le générateur de données factices
+     * @return void
      */
-    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    protected function setUp(): void
     {
-        parent::__construct($name, $data, $dataName);
+        parent::setUp();
         $this->fake = Factory::create('fr_FR');
     }
 
@@ -33,16 +31,11 @@ class TestCase extends PhpUnitTestCase
      * @param string $format
      * @param string $actual
      * @param string $message
-     * @retrun void
+     * @return void
      */
     public static function assertFormattedDate(string $format, string $actual, string $message = ""): void
     {
-        try {
-            /** @var DateTime|false $date */
-            $date = DateTime::createFromFormat($format, $actual);
-        } catch (Exception $e) {
-            $date = false;
-        }
+        $date = DateTime::createFromFormat($format, $actual);
         self::assertInstanceOf(DateTime::class, $date, $message);
     }
 

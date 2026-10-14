@@ -222,7 +222,7 @@ trait PdoQueryable
 
     /**
      * Retourne le nombre de lignes affecté par la dernière exécution.
-     * @return int;
+     * @return int
      */
     protected function getRowsAffected(): int
     {
