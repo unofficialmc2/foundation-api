@@ -138,8 +138,21 @@ trait PdoQueryable
                 'Impossible de préparer la requête : ' . $this->reqSql . ' dans ' . static::class
             );
         }
-        $this->cache[$keyReq] = $stm;
+        if ($this->canReuseStatement()) {
+            $this->cache[$keyReq] = $stm;
+        }
         return $stm;
+    }
+
+    /**
+     * Indique si une requête préparée peut être conservée pour être ré-exécutée
+     * @return bool
+     */
+    private function canReuseStatement(): bool
+    {
+        // depuis PHP 8.4.27 / 8.5.12, ré-exécuter une requête préparée PDO_OCI provoque une violation d'accès
+        // (php/php-src#24372, php/pecl-database-pdo_oci#44) : la requête est donc préparée à chaque exécution
+        return $this->getDbDriver() !== 'oci';
     }
 
     /**

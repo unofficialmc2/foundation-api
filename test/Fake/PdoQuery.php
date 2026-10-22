@@ -5,6 +5,7 @@ namespace Test\Fake;
 
 use FoundationApi\PdoQueryable;
 use PDO;
+use PDOStatement;
 
 /**
  * Fake requête PDO : expose les méthodes protégées de PdoQueryable
@@ -32,5 +33,15 @@ class PdoQuery
     {
         $this->setReqSql($reqSql);
         return $this->fetchOne($param);
+    }
+
+    /**
+     * @param string $reqSql
+     * @return PDOStatement
+     */
+    public function statement(string $reqSql): PDOStatement
+    {
+        $this->setReqSql($reqSql);
+        return $this->execute([]);
     }
 }
